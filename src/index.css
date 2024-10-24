@@ -1,13 +1,578 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.app {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.sidebar {
+  width: 250px;
+  height: 100%;
+  background-color: #2d3436;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  margin-bottom: 40px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar ul li:hover {
+  background-color: #636e72;
+}
+
+
+.dashboard {
+  flex: 1;
+  padding: 20px;
+  background-color: #f1f2f6;
+  overflow-y: auto;
+}
+
+.dashboard h1 {
+  margin-bottom: 20px;
+}
+
+.widgets {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.widget {
+  background-color: #dfe6e9;
+  padding: 20px;
+  border-radius: 10px;
+  width: calc(33.33% - 20px); 
+  text-align: center;
+  min-width: 250px;
+}
+
+@media screen and (max-width: 768px) {
+
+  .sidebar {
+    width: 60px;
+    padding: 10px;
+  }
+
+  .sidebar h2 {
+    display: none;
+  }
+
+  .sidebar ul li {
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .dashboard {
+    margin-left: 60px; 
+    padding: 10px;
+  }
+
+  .widgets {
+    flex-direction: column;
+  }
+
+  .widget {
+    width: 100%; 
+    margin-bottom: 20px;
+  }
+}
+
+button {
+  background-color: #0984e3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #74b9ff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: #0984e3;
+  color: white;
+}
+
+table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.report-tool button {
+  margin: 10px;
+  background-color: #00b894;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.report-tool button:hover {
+  background-color: #55efc4;
+}
+
+.lead-management {
+  padding: 20px;
+}
+
+.lead-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.lead-form input {
+  padding: 10px;
+  border: 1px solid #dcdde1;
+  border-radius: 4px;
+  flex: 1;
+}
+
+.lead-form button {
+  background-color: #0984e3;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.lead-form button:hover {
+  background-color: #74b9ff;
+}
+
+.lead-list {
+  margin-top: 20px;
+}
+
+.lead-item {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  border: 1px solid #dfe6e9;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.lead-item button {
+  background-color: #e74c3c;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.lead-item button:hover {
+  background-color: #ff7675;
+}
+
+.dashboard {
+  padding: 20px;
+}
+
+.widget-selection {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.widget-selection input {
+  margin-right: 10px;
+}
+
+.widgets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.widget {
+  border: 1px solid #dcdde1;
+  border-radius: 4px;
+  padding: 20px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.widget h2 {
+  margin-bottom: 15px;
+}
+
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+.leads {
+  padding: 20px;
+}
+
+.leads table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.leads table, .leads th, .leads td {
+  border: 1px solid #dcdde1;
+}
+
+.leads th, .leads td {
+  padding: 10px;
+  text-align: left;
+}
+
+.leads th {
+  background-color: #f5f6fa;
+}
+
+.leads tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar ul li a:hover {
+  background-color: #636e72;
+}
+.active-link {
+  background-color: #0984e3;
+}
+.analytics {
+  padding: 20px;
+}
+
+.analytics .chart-container {
+  margin-top: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.reports {
+  padding: 20px;
+}
+
+.report-tool {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.report-tool button {
+  margin: 10px;
+  background-color: #00b894;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.report-tool button:hover {
+  background-color: #55efc4;
+}
+.export-buttons {
+  margin-top: 20px;
+}
+
+.export-buttons button {
+  margin-right: 10px;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.export-buttons button:hover {
+  background-color: #45a049;
+}
+body {
+  font-family: Arial, sans-serif;
+}
+
+.leads {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+table th {
+  cursor: pointer;
+  background-color: #f9f9f9;
+}
+
+.filter-sort {
+  margin-bottom: 10px;
+}
+
+.filter-sort select {
+  padding: 5px;
+}
+
+form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+form input, form select {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #45a049;
+}
+
+.export-buttons button {
+  margin-right: 10px;
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.export-buttons button:hover {
+  background-color: #0056b3;
+}
+.dashboard {
+  padding: 20px;
+}
+
+.dashboard h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.add-widget-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.add-widget-btn:hover {
+  background-color: #45a049;
+}
+
+.widgets-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.widget {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.widget h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.remove-widget-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.remove-widget-btn:hover {
+  background-color: #e53935;
+}
+canvas {
+  max-width: 100%;
+}
+.export-buttons {
+  margin-top: 20px;
+}
+
+.export-buttons button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.export-buttons button:hover {
+  background-color: #45a049;
+}
+.active-link {
+  font-weight: bold;
+  color: #007bff;
+  text-decoration: underline;
+}
+.leads {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+.export-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+form {
+  margin: 20px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+form input, form select {
+  padding: 8px;
+  width: calc(50% - 15px); 
+  box-sizing: border-box;
+}
+@media (max-width: 768px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  tr {
+    margin-bottom: 15px;
+  }
+
+  th, td {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  th::before {
+    content: attr(data-label);
+    display: inline-block;
+    width: 50%;
+  }
+
+  form input, form select {
+    width: 100%;
+  }
+
+  .export-buttons {
+    flex-direction: column;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .leads {
+    width: 100%;
+    padding: 10px;
+  }
 }
